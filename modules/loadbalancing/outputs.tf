@@ -16,9 +16,9 @@ output "target_group_arns" {
 
 output "addresses" {
   value = {
-    consul_ui = "${aws_lb.consul_lb.dns_name}:8500"
-    nomad_ui  = "${aws_lb.nomad_lb.dns_name}:4646"
-    fabio_ui  = "${aws_lb.fabio_lb.dns_name}:9998"
-    fabio_lb  = "${aws_lb.fabio_lb.dns_name}:9999"
+    consul_ui = "http://${aws_lb.consul_lb.dns_name}:8500"
+    nomad_ui  = "http://${aws_lb.nomad_lb.dns_name}:4646"
+    fabio_ui  = "http://${aws_lb.fabio_lb.dns_name}:9998"
+    fabio_lb  = "http://${aws_lb.fabio_lb.dns_name}:9999"
   }
 }
