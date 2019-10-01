@@ -76,16 +76,16 @@ resource "aws_lb_listener" "nomad_ui" {
   }
 }
 
-//application load balancer
-resource "aws_lb" "application_lb" {
-  name            = "${var.namespace}-app"
+//fabio load balancer
+resource "aws_lb" "fabio_lb" {
+  name            = "${var.namespace}-fabio"
   internal        = false
   subnets         = var.vpc.public_subnets
   load_balancer_type = "network"
 }
 
-resource "aws_lb_target_group" "application_ui" {
-  name     = "${local.rand}-app-ui"
+resource "aws_lb_target_group" "fabio_ui" {
+  name     = "${local.rand}-fabio-ui"
   port     = 9998
   protocol = "TCP"
   vpc_id   = var.vpc.vpc_id
@@ -104,19 +104,19 @@ resource "aws_lb_target_group" "application_ui" {
   }
 }
 
-resource "aws_lb_listener" "application_ui" {
-  load_balancer_arn = aws_lb.application_lb.arn
+resource "aws_lb_listener" "fabio_ui" {
+  load_balancer_arn = aws_lb.fabio_lb.arn
   port              = "9998"
   protocol          = "TCP"
 
   default_action {
-    target_group_arn = aws_lb_target_group.application_ui.arn
+    target_group_arn = aws_lb_target_group.fabio_ui.arn
     type             = "forward"
   }
 }
 
-resource "aws_lb_target_group" "application_lb" {
-  name     = "${local.rand}-app-lb"
+resource "aws_lb_target_group" "fabio_lb" {
+  name     = "${local.rand}-fabio-lb"
   port     = 9999
   protocol = "TCP"
   vpc_id   = var.vpc.vpc_id
@@ -135,19 +135,19 @@ resource "aws_lb_target_group" "application_lb" {
   }
 }
 
-resource "aws_lb_listener" "application_lb" {
-  load_balancer_arn = aws_lb.application_lb.arn
+resource "aws_lb_listener" "fabio_lb" {
+  load_balancer_arn = aws_lb.fabio_lb.arn
   port              = "9999"
   protocol          = "TCP"
 
   default_action {
-    target_group_arn = aws_lb_target_group.application_lb.arn
+    target_group_arn = aws_lb_target_group.fabio_lb.arn
     type             = "forward"
   }
 }
 
-resource "aws_lb_target_group" "application_db" {
-  name     = "${local.rand}-app-db"
+resource "aws_lb_target_group" "fabio_db" {
+  name     = "${local.rand}-fabio-db"
   port     = 27017
   protocol = "TCP"
   vpc_id   = var.vpc.vpc_id
@@ -165,13 +165,13 @@ resource "aws_lb_target_group" "application_db" {
   }
 }
 
-resource "aws_lb_listener" "application_db" {
-  load_balancer_arn = aws_lb.application_lb.arn
+resource "aws_lb_listener" "fabio_db" {
+  load_balancer_arn = aws_lb.fabio_lb.arn
   port              = "27017"
   protocol          = "TCP"
 
   default_action {
-    target_group_arn = aws_lb_target_group.application_db.arn
+    target_group_arn = aws_lb_target_group.fabio_db.arn
     type             = "forward"
   }
 }

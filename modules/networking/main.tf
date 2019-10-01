@@ -16,7 +16,7 @@ module "vpc" {
   }
 }
 
-module "consul_sg" {
+module "consul_server_sg" {
   source = "scottwinkler/sg/aws"
   vpc_id = module.vpc.vpc_id
   ingress_rules = [
@@ -54,7 +54,7 @@ module "consul_lb_sg" {
   ]
 }
 
-module "nomad_sg" {
+module "nomad_server_sg" {
   source = "scottwinkler/sg/aws"
   vpc_id = module.vpc.vpc_id
   ingress_rules = [
@@ -139,7 +139,7 @@ module "nomad_client_sg" {
   ]
 }
 
-module "application_lb_sg" {
+module "fabio_lb_sg" {
   source = "scottwinkler/sg/aws"
   vpc_id = module.vpc.vpc_id
   ingress_rules = [

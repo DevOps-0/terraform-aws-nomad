@@ -32,7 +32,7 @@ module "consul_servers" {
 
   namespace         = module.resourcegroup.namespace
   vpc               = module.networking.vpc
-  security_group_id = module.networking.sg.consul
+  security_group_id = module.networking.sg.consul_server
   target_group_arns = module.loadbalancing.target_group_arns.consul
 }
 
@@ -54,7 +54,7 @@ module "nomad_servers" {
 
   namespace         = module.resourcegroup.namespace
   vpc               = module.networking.vpc
-  security_group_id = module.networking.sg.nomad
+  security_group_id = module.networking.sg.nomad_server
   target_group_arns = module.loadbalancing.target_group_arns.nomad
 }
 
@@ -77,5 +77,5 @@ module "nomad_clients" {
   namespace         = module.resourcegroup.namespace
   security_group_id = module.networking.sg.nomad_client
   vpc               = module.networking.vpc
-  target_group_arns = module.loadbalancing.target_group_arns.app
+  target_group_arns = module.loadbalancing.target_group_arns.fabio
 }
