@@ -39,7 +39,7 @@ variable "namespace" {
 }
 
 variable "ssh_keypair" {
-  default = "swinkler"
+  default = null
   type    = string
 }
 
